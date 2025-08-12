@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-js
+spec:
+  selector:
+    matchLabels:
+      app: node-js
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: node-js
+    spec:
+      containers:
+      - name: node-js
+        image: xxxxxx.dkr.ecr.us-east-1.amazonaws.com/<repo-name>:{{TAG}}
+# {{TAG}} Here we will change the value with the help of sed command
+        ports:
+          - containerPort: 3000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-js
+spec:
+  selector:
+      app: node-js
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+
+

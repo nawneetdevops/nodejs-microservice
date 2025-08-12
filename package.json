@@ -1,0 +1,8 @@
+{
+  "name": "nodejs-express-on-aws-ec2",
+  "version": "0.0.1",
+  "build-dev": "tsc && mkdir -p uploads && mkdir -p dist/templates && mkdir -p dist/fonts && cp -R src/templates/ dist/templates && cp -R src/fonts/ dist/fonts",
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}
