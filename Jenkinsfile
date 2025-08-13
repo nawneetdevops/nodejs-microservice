@@ -49,6 +49,7 @@ pipeline {
                         aws eks update-kubeconfig --name eks
 
                         kubectl apply -f deploy.yaml
+                        kubectl rollout restart deployment node-js
                     """
                 }
             }
