@@ -45,7 +45,12 @@ pipeline {
                     // Replace image tag in deploy.yaml
                     sh """
                         aws eks update-kubeconfig --name eks
-                        sed -i "s|{{TAG}}|${IMAGE_TAG}|g" deploy.yaml
+                        sed -i \
+                        -e "s|\${AWS_ACCOUNT_ID}|${AWS_ACCOUNT_ID}|g" \
+                        -e "s|\${AWS_REGION}|${AWS_REGION}|g" \
+                        -e "s|\${ECR_REPOSITORY}|${ECR_REPOSITORY}|g" \
+                        -e "s|{{TAG}}|${IMAGE_TAG}|g" \
+                        deploy.yaml
                         kubectl apply -f deploy.yaml
                     """
                 }
