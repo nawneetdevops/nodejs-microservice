@@ -2,10 +2,9 @@ pipeline {
     agent any
  
     environment {
-        AWS_ACCOUNT_ID = credentials('AWS_ACCOUNT_ID')
-        AWS_REGION = credentials('AWS_REGION')
-        ECR_REPOSITORY = credentials('ECR_REPOSITORY')
-        KUBECONFIG = credentials('KUBECONFIG')
+        AWS_ACCOUNT_ID = "908862620161"
+        AWS_REGION = "ap-south-1"
+        ECR_REPOSITORY = "nodejs"
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
  
@@ -46,9 +45,7 @@ pipeline {
                     // Replace image tag in deploy.yaml
                     sh """
                         sed -i 's|image:.*|image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}|g' deploy.yaml
- 
-                        # Apply Kubernetes configuration
-                        export KUBECONFIG=${KUBECONFIG}
+
                         kubectl apply -f deploy.yaml
                     """
                 }
