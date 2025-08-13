@@ -44,6 +44,7 @@ pipeline {
                 script {
                     // Replace image tag in deploy.yaml
                     sh """
+                        aws eks update-kubeconfig --name eks
                         sed -i "s|{{TAG}}|${IMAGE_TAG}|g" deploy.yaml
                         kubectl apply -f deploy.yaml
                     """
