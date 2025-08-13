@@ -44,8 +44,7 @@ pipeline {
                 script {
                     // Replace image tag in deploy.yaml
                     sh """
-                        sed -i 's|image:.*|image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}|g' deploy.yaml
-
+                        sed -i "s|{{TAG}}|${IMAGE_TAG}|g" deploy.yaml
                         kubectl apply -f deploy.yaml
                     """
                 }
