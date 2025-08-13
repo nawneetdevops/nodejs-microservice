@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-js
-        image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:{{TAG}}
+        image: 908862620161.dkr.ecr.ap-south-1.amazonaws.com/nodejs:latest
 # {{TAG}} Here we will change the value with the help of sed command
         ports:
           - containerPort: 3000
