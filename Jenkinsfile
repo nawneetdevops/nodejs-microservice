@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG} .
+                       
                         docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY} .
                     """
                 }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
+
                         docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}
                     """
                 }
@@ -47,9 +47,8 @@ pipeline {
                     // Replace image tag in deploy.yaml
                     sh """
                         aws eks update-kubeconfig --name eks
-
                         kubectl apply -f deploy.yaml
-                        kubectl rollout restart deployment node-js
+                        kubectl rollout restart deployment node-js -n test
                     """
                 }
             }
