@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-js
-        image: xxxxxx.dkr.ecr.us-east-1.amazonaws.com/<repo-name>:{{TAG}}
+        image: 908862620161.dkr.ecr.ap-south-1.amazonaws.com/nodejs:{{TAG}}
 # {{TAG}} Here we will change the value with the help of sed command
         ports:
           - containerPort: 3000
@@ -25,6 +25,7 @@ kind: Service
 metadata:
   name: node-js
 spec:
+  type: LoadBalancer
   selector:
       app: node-js
   ports:
